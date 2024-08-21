@@ -4,6 +4,7 @@ import cn.hutool.core.io.IoUtil;
 import cn.hutool.core.util.ZipUtil;
 import cn.iocoder.yudao.framework.common.pojo.CommonResult;
 import cn.iocoder.yudao.framework.common.pojo.PageResult;
+import cn.iocoder.yudao.framework.common.util.io.FileUtils;
 import cn.iocoder.yudao.framework.common.util.object.BeanUtils;
 import cn.iocoder.yudao.module.infra.controller.admin.codegen.vo.CodegenCreateListReqVO;
 import cn.iocoder.yudao.module.infra.controller.admin.codegen.vo.CodegenDetailRespVO;
@@ -29,6 +30,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
@@ -144,6 +147,7 @@ public class CodegenController {
         ByteArrayInputStream[] ins = codes.values().stream().map(IoUtil::toUtf8Stream).toArray(ByteArrayInputStream[]::new);
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         ZipUtil.zip(outputStream, paths, ins);
+
         // 输出
         writeAttachment(response, "codegen.zip", outputStream.toByteArray());
     }
