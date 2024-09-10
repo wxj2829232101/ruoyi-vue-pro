@@ -28,7 +28,7 @@ services:
           args:
             - '-Dserver.port=48080'
             - '-jar'
-            - target/demo-0.0.1-SNAPSHOT.jar
+            - target/yudao-server.jar
       triggers:
         - name: httpTrigger
           type: http
